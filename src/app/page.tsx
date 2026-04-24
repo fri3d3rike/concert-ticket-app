@@ -3,11 +3,8 @@
 import { useEffect } from "react";
 import Link from "next/link";
 
-const event19 =
-  "https://www.eventbrite.com/e/grenzen-uberwinden-chorkonzert-kandern-tickets-1988182567580?aff=oddtdtcreator";
-
-const event20 =
-  "HIER_DEN_EVENTBRITE_LINK_FUER_20_JUNI_EINFUEGEN";
+const event19 = "1988182567580";
+const event20 = "1988182567580"; // später durch anderes Event ersetzen
 
 export default function Home() {
   useEffect(() => {
@@ -19,33 +16,33 @@ export default function Home() {
       const EB = (window as any).EBWidgets;
       if (!EB) return;
 
-      // 🔵 EMBED WIDGET
       EB.createWidget({
         widgetType: "checkout",
-        eventId: "1988182567580",
-        iframeContainerId: "eventbrite-widget-container-1988182567580",
-        iframeContainerHeight: 425,
-        themeSettings: {
-          brandColor: "#0042aa",
-          fontColor: "#000000",
-          background: "#fff2d5",
-        },
-      });
-
-      // 🟢 MODAL WIDGET
-      EB.createWidget({
-        widgetType: "checkout",
-        eventId: "1988182567580",
+        eventId: event19,
         modal: true,
-        modalTriggerElementId:
-          "eventbrite-widget-modal-trigger-1988182567580",
+        modalTriggerElementId: "eventbrite-widget-modal-trigger-19",
         themeSettings: {
           brandColor: "#0042aa",
           fontColor: "#000000",
           background: "#e0edd4",
         },
         onOrderComplete: () => {
-          console.log("Order complete!");
+          console.log("Order complete for 19 June!");
+        },
+      });
+
+      EB.createWidget({
+        widgetType: "checkout",
+        eventId: event20,
+        modal: true,
+        modalTriggerElementId: "eventbrite-widget-modal-trigger-20",
+        themeSettings: {
+          brandColor: "#0042aa",
+          fontColor: "#000000",
+          background: "#e0edd4",
+        },
+        onOrderComplete: () => {
+          console.log("Order complete for 20 June!");
         },
       });
     };
@@ -54,112 +51,97 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-zinc-50 px-4 py-10 font-sans dark:bg-black flex flex-col justify-between">
-      <main className="mx-auto max-w-3xl rounded-2xl bg-white p-8 text-center shadow-lg dark:bg-zinc-900">
-        
-        <section className="mx-auto max-w-2xl rounded-2xl bg-white p-8 shadow">
-          <h1 className="mb-3 text-4xl font-bold text-gray-900 dark:text-white">
+    <div className="min-h-screen bg-zinc-50 px-4 py-10 font-sans flex flex-col justify-between">
+      <main className="mx-auto max-w-5xl rounded-2xl bg-white p-8 text-center shadow-lg">
+        <section className="mx-auto max-w-4xl rounded-2xl bg-white p-8 shadow">
+          <h1 className="mb-3 mt-3 text-7xl font-bold text-gray-900">
             Grenzen überwinden
           </h1>
 
-          <h2 className="mb-6 text-2xl font-semibold text-gray-700 dark:text-gray-300">
+          <h2 className="mb-6 text-4xl font-semibold text-gray-700">
             Chorkonzert Kandern
           </h2>
 
-          <p className="mb-4 text-lg leading-relaxed text-gray-600 dark:text-gray-400">
-            Wir laden Sie herzlich zu unserem großen Chorkonzert „Grenzen überwinden“ in Kandern ein.
-          </p>
+          <div className="flex flex-wrap justify-evenly gap-4 mb-8 p-4">
+            <span className="text-gray-600">Popchor Tannenkirch</span>
+            <span className="text-gray-600">Gesangverein Holzen</span>
+            <span className="text-gray-600">Gesangverein Feuerbach</span>
+          </div>
 
-          <p className="mb-8 text-lg leading-relaxed text-gray-600 dark:text-gray-400">
-            Reservieren Sie hier kostenlos Ihre Plätze für eines der beiden
-            Konzerte.
-          </p>
+          <div className="mb-8 space-y-4 text-lg leading-relaxed text-gray-600">
+            <p>
+              Wir laden Sie herzlich zu unserem großen Chorkonzert „Grenzen überwinden“
+              in Kandern in der St. Clemens Kirche ein.
+            </p>
+
+            <p>
+              Reservieren Sie hier kostenlos Ihre Plätze für eines der beiden Konzerte.
+            </p>
+
+            <p>
+              Wir freuen uns sehr auf Ihr Kommen und auf einen gemeinsamen musikalischen Abend!
+            </p>
+          </div>
 
           {/* KONZERT BUTTONS */}
-          <div className="grid gap-5 md:grid-cols-2">
-            
-            <div className="rounded-xl border border-gray-200 p-6 dark:border-zinc-700">
-              <h3 className="mb-2 text-xl font-semibold text-gray-900 dark:text-white">
+          <div className=" grid gap-5 md:grid-cols-2">
+            <div className="rounded-xl border border-gray-200 p-6">
+              <h3 className="mb-3 text-2xl font-bold text-gray-900">
                 Freitag, 19. Juni
               </h3>
-              <p className="mb-5 text-gray-600 dark:text-gray-400">
+
+              <p className="mb-5 text-gray-600">
                 Konzertbeginn: 19:00 Uhr
               </p>
-              <a
-                href={event19}
-                target="_blank"
-                rel="noopener noreferrer"
+
+              <button
+                id="eventbrite-widget-modal-trigger-19"
+                type="button"
                 className="inline-block rounded-lg bg-blue-600 px-6 py-3 font-semibold text-white transition hover:bg-blue-700"
               >
-                Tickets reservieren
-              </a>
+                Hier buchen!
+              </button>
             </div>
 
-            <div className="rounded-xl border border-gray-200 p-6 dark:border-zinc-700">
-              <h3 className="mb-2 text-xl font-semibold text-gray-900 dark:text-white">
+            <div className="rounded-xl border border-gray-200 p-6">
+              <h3 className="mb-3 text-2xl font-bold text-gray-900">
                 Samstag, 20. Juni
               </h3>
-              <p className="mb-5 text-gray-600 dark:text-gray-400">
+
+              <p className="mb-5 text-gray-600">
                 Konzertbeginn: 19:00 Uhr
               </p>
-              <a
-                href={event20}
-                target="_blank"
-                rel="noopener noreferrer"
+
+              <button
+                id="eventbrite-widget-modal-trigger-20"
+                type="button"
                 className="inline-block rounded-lg bg-blue-600 px-6 py-3 font-semibold text-white transition hover:bg-blue-700"
               >
-                Tickets reservieren
-              </a>
+                Hier buchen!
+              </button>
             </div>
-
           </div>
 
-          {/* 🟢 MODAL BUTTON (EMPFOHLEN) */}
-          <div className="mt-10">
-            <h3 className="mb-3 text-xl font-semibold text-gray-900 dark:text-white">
-              Direkt hier buchen (Modal)
-            </h3>
+          <noscript>
+            <p className="mt-6 text-sm text-gray-500">
+              JavaScript ist deaktiviert. Bitte buchen Sie direkt über
+              Eventbrite.
+            </p>
+          </noscript>
 
-            {/* NOSCRIPT */}
-            <noscript>
-              <a
-                href="https://www.eventbrite.com/e/grenzen-uberwinden-chorkonzert-kandern-website-noch-im-aufbau-tickets-1988182567580"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Buy Tickets on Eventbrite
-              </a>
-            </noscript>
-
-            <button
-              id="eventbrite-widget-modal-trigger-1988182567580"
-              className="mt-2 rounded-lg bg-green-600 px-6 py-3 font-semibold text-white hover:bg-green-700"
-            >
-              Hier buchen!
-            </button>
-          </div>
-
-          {/* 🔵 EMBED (ZUM VERGLEICH) */}
-          <div className="mt-12">
-            <h3 className="mb-3 text-xl font-semibold text-gray-900 dark:text-white">
-              Eingebettete Ansicht (Embed)
-            </h3>
-
-            <div id="eventbrite-widget-container-1988182567580"></div>
-          </div>
-
-          <p className="mt-8 text-sm text-gray-500 dark:text-gray-400">
-            Bitte nehmen Sie reservierte Plätze spätestens 20 Minuten vor Beginn ein. <br />
+          <p className="mt-8 text-sm text-gray-500">
+            Bitte nehmen Sie reservierte Plätze spätestens 20 Minuten vor Konzertbeginn
+            ein. <br />
             Danach können freie Plätze weitergegeben werden.
           </p>
 
           {/* CHÖRE */}
           <div className="mt-10 text-left">
-            <h3 className="mb-4 text-xl font-semibold text-gray-900 dark:text-white text-center">
+            <h3 className="mb-4 text-xl font-semibold text-gray-900 text-center">
               Mitwirkende Chöre
             </h3>
 
-            <ul className="space-y-3 text-gray-700 dark:text-gray-300 text-center">
+            <ul className="space-y-3 text-center text-gray-700">
               <li>
                 <a
                   href="https://popchor-tannenkirch.de"
@@ -193,7 +175,6 @@ export default function Home() {
             Impressum
           </Link>
         </footer>
-
       </main>
     </div>
   );
