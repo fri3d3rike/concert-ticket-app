@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect } from "react";
 import Link from "next/link";
 
 const event19 =
@@ -7,116 +10,155 @@ const event20 =
   "HIER_DEN_EVENTBRITE_LINK_FUER_20_JUNI_EINFUEGEN";
 
 export default function Home() {
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://www.eventbrite.com/static/widgets/eb_widgets.js";
+    script.async = true;
+
+    script.onload = () => {
+      if ((window as any).EBWidgets) {
+        (window as any).EBWidgets.createWidget({
+          widgetType: "checkout",
+          eventId: "1988182567580",
+          iframeContainerId: "eventbrite-widget-container-1988182567580",
+          iframeContainerHeight: 425,
+          themeSettings: {
+            brandColor: "#0042aa",
+            fontColor: "#000000",
+            background: "#fff2d5",
+          },
+          onOrderComplete: () => {
+            console.log("Order complete!");
+          },
+        });
+      }
+    };
+
+    document.body.appendChild(script);
+  }, []);
+
   return (
     <div className="min-h-screen bg-zinc-50 px-4 py-10 font-sans dark:bg-black flex flex-col justify-between">
-      
       <main className="mx-auto max-w-3xl rounded-2xl bg-white p-8 text-center shadow-lg dark:bg-zinc-900">
-         <section className="mx-auto max-w-2xl rounded-2xl bg-white p-8 shadow">
-        <h1 className="mb-3 text-4xl font-bold text-gray-900 dark:text-white">
-          Grenzen überwinden
-        </h1>
+        
+        <section className="mx-auto max-w-2xl rounded-2xl bg-white p-8 shadow">
+          <h1 className="mb-3 text-4xl font-bold text-gray-900 dark:text-white">
+            Grenzen überwinden
+          </h1>
 
-        <h2 className="mb-6 text-2xl font-semibold text-gray-700 dark:text-gray-300">
-          Chorkonzert Kandern
-        </h2>
+          <h2 className="mb-6 text-2xl font-semibold text-gray-700 dark:text-gray-300">
+            Chorkonzert Kandern
+          </h2>
 
-        <p className="mb-4 text-lg leading-relaxed text-gray-600 dark:text-gray-400">
-          Wir laden Sie herzlich zu unserem großen Chorkonzert „Grenzen überwinden“ in Kandern ein.
-        </p>
+          <p className="mb-4 text-lg leading-relaxed text-gray-600 dark:text-gray-400">
+            Wir laden Sie herzlich zu unserem großen Chorkonzert „Grenzen überwinden“ in Kandern ein.
+          </p>
 
-        <p className="mb-8 text-lg leading-relaxed text-gray-600 dark:text-gray-400">
-          Reservieren Sie hier kostenlos Ihre Plätze für eines der beiden
-          Konzerte. Die Buchung erfolgt über Eventbrite.
-        </p>
+          <p className="mb-8 text-lg leading-relaxed text-gray-600 dark:text-gray-400">
+            Reservieren Sie hier kostenlos Ihre Plätze für eines der beiden
+            Konzerte. Die Buchung erfolgt über Eventbrite.
+          </p>
 
-        {/* KONZERT BUTTONS */}
-        <div className="grid gap-5 md:grid-cols-2">
-          
-          <div className="rounded-xl border border-gray-200 p-6 dark:border-zinc-700">
-            <h3 className="mb-2 text-xl font-semibold text-gray-900 dark:text-white">
-              Freitag, 19. Juni
-            </h3>
-            <p className="mb-5 text-gray-600 dark:text-gray-400">
-              Konzertbeginn: 19:00 Uhr
-            </p>
-            <a
-              href={event19}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block rounded-lg bg-blue-600 px-6 py-3 font-semibold text-white transition hover:bg-blue-700"
-            >
-              Tickets reservieren
-            </a>
-          </div>
-
-          <div className="rounded-xl border border-gray-200 p-6 dark:border-zinc-700">
-            <h3 className="mb-2 text-xl font-semibold text-gray-900 dark:text-white">
-              Samstag, 20. Juni
-            </h3>
-            <p className="mb-5 text-gray-600 dark:text-gray-400">
-              Konzertbeginn: 19:00 Uhr
-            </p>
-            <a
-              href={event20}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block rounded-lg bg-blue-600 px-6 py-3 font-semibold text-white transition hover:bg-blue-700"
-            >
-              Tickets reservieren
-            </a>
-          </div>
-
-        </div>
-                <p className="mt-8 text-sm text-gray-500 dark:text-gray-400">
-          Bitte nehmen Sie reservierte Plätze spätestens 20 Minuten vor Beginn ein. <br />
-          Danach können freie Plätze weitergegeben werden.
-        </p>
-
-        {/* CHÖRE */}
-        <div className="mt-10 text-left">
-          <h3 className="mb-4 text-xl font-semibold text-gray-900 dark:text-white text-center">
-            Mitwirkende Chöre
-          </h3>
-
-          <ul className="space-y-3 text-gray-700 dark:text-gray-300 text-center">
-            <li>
+          {/* KONZERT BUTTONS */}
+          <div className="grid gap-5 md:grid-cols-2">
+            
+            <div className="rounded-xl border border-gray-200 p-6 dark:border-zinc-700">
+              <h3 className="mb-2 text-xl font-semibold text-gray-900 dark:text-white">
+                Freitag, 19. Juni
+              </h3>
+              <p className="mb-5 text-gray-600 dark:text-gray-400">
+                Konzertbeginn: 19:00 Uhr
+              </p>
               <a
-                href="https://popchor-tannenkirch.de"
+                href={event19}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-blue-600 hover:underline"
+                className="inline-block rounded-lg bg-blue-600 px-6 py-3 font-semibold text-white transition hover:bg-blue-700"
               >
-                Popchor Tannenkirch
+                Tickets reservieren
               </a>
-            </li>
+            </div>
 
-            <li>
+            <div className="rounded-xl border border-gray-200 p-6 dark:border-zinc-700">
+              <h3 className="mb-2 text-xl font-semibold text-gray-900 dark:text-white">
+                Samstag, 20. Juni
+              </h3>
+              <p className="mb-5 text-gray-600 dark:text-gray-400">
+                Konzertbeginn: 19:00 Uhr
+              </p>
               <a
-                href="https://www.gesangvereinholzen.de"
+                href={event20}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-blue-600 hover:underline"
+                className="inline-block rounded-lg bg-blue-600 px-6 py-3 font-semibold text-white transition hover:bg-blue-700"
               >
-                Gesangverein Holzen
+                Tickets reservieren
               </a>
-            </li>
+            </div>
 
-            <li>
-              Gesangverein Feuerbach 1865 e.V.
-            </li>
-          </ul>
-        </div>
+          </div>
 
+          {/* ✅ EMBEDDED EVENTBRITE WIDGET */}
+          <div className="mt-10">
+            <h3 className="mb-4 text-xl font-semibold text-gray-900 dark:text-white">
+              Direkt hier buchen (19. Juni)
+            </h3>
 
-              </section>
+            <div
+              id="eventbrite-widget-container-1988182567580"
+              className="mx-auto"
+            ></div>
+          </div>
 
-      {/* FOOTER */}
-      <footer className="mt-8 text-xs text-gray-500">
-        <Link href="/impressum" className="hover:underline">
-          Impressum
-        </Link>
-      </footer>
-    </main>
+          <p className="mt-8 text-sm text-gray-500 dark:text-gray-400">
+            Bitte nehmen Sie reservierte Plätze spätestens 20 Minuten vor Beginn ein. <br />
+            Danach können freie Plätze weitergegeben werden.
+          </p>
+
+          {/* CHÖRE */}
+          <div className="mt-10 text-left">
+            <h3 className="mb-4 text-xl font-semibold text-gray-900 dark:text-white text-center">
+              Mitwirkende Chöre
+            </h3>
+
+            <ul className="space-y-3 text-gray-700 dark:text-gray-300 text-center">
+              <li>
+                <a
+                  href="https://popchor-tannenkirch.de"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-600 hover:underline"
+                >
+                  Popchor Tannenkirch
+                </a>
+              </li>
+
+              <li>
+                <a
+                  href="https://www.gesangvereinholzen.de"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-600 hover:underline"
+                >
+                  Gesangverein Holzen
+                </a>
+              </li>
+
+              <li>
+                Gesangverein Feuerbach 1865 e.V.
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        {/* FOOTER */}
+        <footer className="mt-8 text-xs text-gray-500">
+          <Link href="/impressum" className="hover:underline">
+            Impressum
+          </Link>
+        </footer>
+
+      </main>
     </div>
   );
 }
