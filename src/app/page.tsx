@@ -16,22 +16,38 @@ export default function Home() {
     script.async = true;
 
     script.onload = () => {
-      if ((window as any).EBWidgets) {
-        (window as any).EBWidgets.createWidget({
-          widgetType: "checkout",
-          eventId: "1988182567580",
-          iframeContainerId: "eventbrite-widget-container-1988182567580",
-          iframeContainerHeight: 425,
-          themeSettings: {
-            brandColor: "#0042aa",
-            fontColor: "#000000",
-            background: "#fff2d5",
-          },
-          onOrderComplete: () => {
-            console.log("Order complete!");
-          },
-        });
-      }
+      const EB = (window as any).EBWidgets;
+      if (!EB) return;
+
+      // 🔵 EMBED WIDGET
+      EB.createWidget({
+        widgetType: "checkout",
+        eventId: "1988182567580",
+        iframeContainerId: "eventbrite-widget-container-1988182567580",
+        iframeContainerHeight: 425,
+        themeSettings: {
+          brandColor: "#0042aa",
+          fontColor: "#000000",
+          background: "#fff2d5",
+        },
+      });
+
+      // 🟢 MODAL WIDGET
+      EB.createWidget({
+        widgetType: "checkout",
+        eventId: "1988182567580",
+        modal: true,
+        modalTriggerElementId:
+          "eventbrite-widget-modal-trigger-1988182567580",
+        themeSettings: {
+          brandColor: "#0042aa",
+          fontColor: "#000000",
+          background: "#e0edd4",
+        },
+        onOrderComplete: () => {
+          console.log("Order complete!");
+        },
+      });
     };
 
     document.body.appendChild(script);
@@ -56,7 +72,7 @@ export default function Home() {
 
           <p className="mb-8 text-lg leading-relaxed text-gray-600 dark:text-gray-400">
             Reservieren Sie hier kostenlos Ihre Plätze für eines der beiden
-            Konzerte. Die Buchung erfolgt über Eventbrite.
+            Konzerte.
           </p>
 
           {/* KONZERT BUTTONS */}
@@ -98,16 +114,38 @@ export default function Home() {
 
           </div>
 
-          {/* ✅ EMBEDDED EVENTBRITE WIDGET */}
+          {/* 🟢 MODAL BUTTON (EMPFOHLEN) */}
           <div className="mt-10">
-            <h3 className="mb-4 text-xl font-semibold text-gray-900 dark:text-white">
-              Direkt hier buchen (19. Juni)
+            <h3 className="mb-3 text-xl font-semibold text-gray-900 dark:text-white">
+              Direkt hier buchen (Modal)
             </h3>
 
-            <div
-              id="eventbrite-widget-container-1988182567580"
-              className="mx-auto"
-            ></div>
+            {/* NOSCRIPT */}
+            <noscript>
+              <a
+                href="https://www.eventbrite.com/e/grenzen-uberwinden-chorkonzert-kandern-website-noch-im-aufbau-tickets-1988182567580"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Buy Tickets on Eventbrite
+              </a>
+            </noscript>
+
+            <button
+              id="eventbrite-widget-modal-trigger-1988182567580"
+              className="mt-2 rounded-lg bg-green-600 px-6 py-3 font-semibold text-white hover:bg-green-700"
+            >
+              Hier buchen!
+            </button>
+          </div>
+
+          {/* 🔵 EMBED (ZUM VERGLEICH) */}
+          <div className="mt-12">
+            <h3 className="mb-3 text-xl font-semibold text-gray-900 dark:text-white">
+              Eingebettete Ansicht (Embed)
+            </h3>
+
+            <div id="eventbrite-widget-container-1988182567580"></div>
           </div>
 
           <p className="mt-8 text-sm text-gray-500 dark:text-gray-400">
@@ -144,9 +182,7 @@ export default function Home() {
                 </a>
               </li>
 
-              <li>
-                Gesangverein Feuerbach 1865 e.V.
-              </li>
+              <li>Gesangverein Feuerbach 1865 e.V.</li>
             </ul>
           </div>
         </section>
