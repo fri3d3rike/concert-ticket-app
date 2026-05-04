@@ -75,7 +75,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-concert-cream font-sans text-concert-text">
       <Script
-        src="https://www.eventbrite.com/static/widgets/eb_widgets.js"
+        src="https://www.eventbrite.de/static/widgets/eb_widgets.js" 
         strategy="afterInteractive"
         onReady={createEventbriteWidget}
       />
