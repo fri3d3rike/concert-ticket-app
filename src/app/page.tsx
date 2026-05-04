@@ -23,8 +23,8 @@ const eventbriteWidgetTheme = {
   background: "#EFE3D2",
 };
 
-const getEventbriteContainerId = (eventId: string) =>
-  `eventbrite-widget-container-${eventId}`;
+const getEventbriteModalTriggerId = (eventId: string) =>
+  `eventbrite-widget-modal-trigger-${eventId}`;
 
 export default function Home() {
   const createEventbriteWidget = () => {
@@ -34,8 +34,8 @@ export default function Home() {
           createWidget: (options: {
             widgetType: "checkout";
             eventId: string;
-            iframeContainerId: string;
-            iframeContainerHeight: number;
+            modal: true;
+            modalTriggerElementId: string;
             themeSettings: {
               brandColor: string;
               fontColor: string;
@@ -50,21 +50,25 @@ export default function Home() {
     if (!EB) return;
 
     concerts.forEach((concert) => {
-      const iframeContainerId = getEventbriteContainerId(concert.eventId);
-      const container = document.getElementById(iframeContainerId);
+      const modalTriggerElementId = getEventbriteModalTriggerId(
+        concert.eventId,
+      );
+      const trigger = document.getElementById(modalTriggerElementId);
 
-      if (!container || container.querySelector("iframe")) return;
+      if (!trigger || trigger.dataset.eventbriteWidgetReady) return;
 
       EB.createWidget({
         widgetType: "checkout",
         eventId: concert.eventId,
-        iframeContainerId,
-        iframeContainerHeight: 425,
+        modal: true,
+        modalTriggerElementId,
         themeSettings: eventbriteWidgetTheme,
         onOrderComplete: () => {
           console.log("Order complete!");
         },
       });
+
+      trigger.dataset.eventbriteWidgetReady = "true";
     });
   };
 
@@ -160,12 +164,13 @@ export default function Home() {
                       <p className="mt-4 text-lg text-concert-forest">
                         {concert.time}
                       </p>
-                      <a
-                        href={`#${getEventbriteContainerId(concert.eventId)}`}
+                      <button
+                        id={getEventbriteModalTriggerId(concert.eventId)}
+                        type="button"
                         className="mt-6 inline-flex rounded-md bg-concert-burgundy px-6 py-3 text-base font-semibold text-white shadow-sm transition hover:bg-concert-burgundy-dark"
                       >
                         Tickets reservieren
-                      </a>
+                      </button>
                     </div>
                   </article>
                 ))}
