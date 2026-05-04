@@ -1,177 +1,233 @@
 "use client";
 
-import { useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
+import Script from "next/script";
 
-const event19 = "1988182567580";
-const event20 = "1988182567580"; // später durch anderes Event ersetzen
+const concerts = [
+  {
+    title: "Freitag, 19. Juni",
+    time: "Konzertbeginn: 19:00 Uhr",
+    eventId: "1988762157148",
+  },
+  {
+    title: "Samstag, 20. Juni",
+    time: "Konzertbeginn: 19:00 Uhr",
+    eventId: "1988766320601",
+  },
+];
+
+const eventbriteWidgetTheme = {
+  brandColor: "#8B2E2E",
+  fontColor: "#2E2723",
+  background: "#EFE3D2",
+};
+
+const getEventbriteContainerId = (eventId: string) =>
+  `eventbrite-widget-container-${eventId}`;
 
 export default function Home() {
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "https://www.eventbrite.com/static/widgets/eb_widgets.js";
-    script.async = true;
+  const createEventbriteWidget = () => {
+    const EB = (
+      window as typeof window & {
+        EBWidgets?: {
+          createWidget: (options: {
+            widgetType: "checkout";
+            eventId: string;
+            iframeContainerId: string;
+            iframeContainerHeight: number;
+            themeSettings: {
+              brandColor: string;
+              fontColor: string;
+              background: string;
+            };
+            onOrderComplete: () => void;
+          }) => void;
+        };
+      }
+    ).EBWidgets;
 
-    script.onload = () => {
-      const EB = (window as any).EBWidgets;
-      if (!EB) return;
+    if (!EB) return;
+
+    concerts.forEach((concert) => {
+      const iframeContainerId = getEventbriteContainerId(concert.eventId);
+      const container = document.getElementById(iframeContainerId);
+
+      if (!container || container.querySelector("iframe")) return;
 
       EB.createWidget({
         widgetType: "checkout",
-        eventId: event19,
-        modal: true,
-        modalTriggerElementId: "eventbrite-widget-modal-trigger-19",
-        themeSettings: {
-          brandColor: "#0042aa",
-          fontColor: "#000000",
-          background: "#e0edd4",
-        },
+        eventId: concert.eventId,
+        iframeContainerId,
+        iframeContainerHeight: 425,
+        themeSettings: eventbriteWidgetTheme,
         onOrderComplete: () => {
-          console.log("Order complete for 19 June!");
+          console.log("Order complete!");
         },
       });
-
-      EB.createWidget({
-        widgetType: "checkout",
-        eventId: event20,
-        modal: true,
-        modalTriggerElementId: "eventbrite-widget-modal-trigger-20",
-        themeSettings: {
-          brandColor: "#0042aa",
-          fontColor: "#000000",
-          background: "#e0edd4",
-        },
-        onOrderComplete: () => {
-          console.log("Order complete for 20 June!");
-        },
-      });
-    };
-
-    document.body.appendChild(script);
-  }, []);
+    });
+  };
 
   return (
-    <div className="min-h-screen bg-zinc-50 px-4 py-10 font-sans flex flex-col justify-between">
-      <main className="mx-auto max-w-5xl rounded-2xl bg-white p-8 text-center shadow-lg">
-        <section className="mx-auto max-w-4xl rounded-2xl bg-white p-8 shadow">
-          <h1 className="mb-3 mt-3 text-7xl font-bold text-gray-900">
-            Grenzen überwinden
-          </h1>
+    <div className="min-h-screen bg-concert-cream font-sans text-concert-text">
+      <Script
+        src="https://www.eventbrite.com/static/widgets/eb_widgets.js"
+        strategy="afterInteractive"
+        onReady={createEventbriteWidget}
+      />
 
-          <h2 className="mb-6 text-4xl font-semibold text-gray-700">
-            Chorkonzert Kandern
-          </h2>
-
-          <div className="flex flex-wrap justify-evenly gap-4 mb-8 p-4">
-            <span className="text-gray-600">Popchor Tannenkirch</span>
-            <span className="text-gray-600">Gesangverein Holzen</span>
-            <span className="text-gray-600">Gesangverein Feuerbach</span>
+      <main>
+        <section className="relative min-h-[620px] overflow-hidden px-5 py-10 text-center text-white sm:py-14">
+          <div className="absolute inset-0">
+            <Image
+              src="/chorbild.jpeg"
+              alt="Chorprobe für das Chorkonzert Grenzen überwinden"
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover"
+            />
+            <div className="absolute inset-0 bg-[rgba(46,39,35,0.62)]" />
+            <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-concert-cream to-transparent" />
           </div>
 
-          <div className="mb-8 space-y-4 text-lg leading-relaxed text-gray-600">
-            <p>
-              Wir laden Sie herzlich zu unserem großen Chorkonzert „Grenzen überwinden“
-              in Kandern in der St. Clemens Kirche ein.
+          <div className="relative z-10 mx-auto flex min-h-[540px] max-w-5xl flex-col items-center justify-center">
+            <div className="mb-6 h-px w-24 bg-concert-gold" />
+            <p className="mb-4 text-sm font-semibold uppercase tracking-[0.24em] text-[#F1D8A9]">
+              Chorkonzert Kandern
             </p>
+            <h1 className="max-w-4xl text-5xl font-bold leading-tight sm:text-7xl">
+              Grenzen überwinden
+            </h1>
 
-            <p>
-              Reservieren Sie hier kostenlos Ihre Plätze für eines der beiden Konzerte.
-            </p>
-
-            <p>
-              Wir freuen uns sehr auf Ihr Kommen und auf einen gemeinsamen musikalischen Abend!
+            <div className="p-8 mb-4 flex flex-wrap justify-center gap-6 text-sm font-medium text-concert-forest">
+              <span className="text-sm font-semibold  tracking-[0.24em] text-[#F1D8A9]">
+                Popchor Tannenkirch
+              </span>
+              <span className="text-sm font-semibold  tracking-[0.24em] text-[#F1D8A9]">
+                Gesangverein Holzen
+              </span>
+              <span className="text-sm font-semibold  tracking-[0.24em] text-[#F1D8A9]">
+                Gesangverein Feuerbach
+              </span>
+            </div>
+            <p className="mt-2 max-w-2xl text-lg leading-8 text-[#F7F1E8] sm:text-xl">
+              Ein gemeinsamer musikalischer Abend in der St. Clemens Kirche.
             </p>
           </div>
+        </section>
 
-          {/* KONZERT BUTTONS */}
-          <div className=" grid gap-5 md:grid-cols-2">
-            <div className="rounded-xl border border-gray-200 p-6">
-              <h3 className="mb-3 text-2xl font-bold text-gray-900">
-                Freitag, 19. Juni
-              </h3>
-
-              <p className="mb-5 text-gray-600">
-                Konzertbeginn: 19:00 Uhr
+        <section className="px-5 pb-14 pt-4">
+          <div className="mx-auto max-w-5xl rounded-lg border border-concert-gold/25 bg-concert-beige p-6 shadow-[0_24px_70px_rgba(46,39,35,0.12)] sm:p-10">
+            <div className="mx-auto mb-9 max-w-3xl space-y-4 text-center text-lg leading-relaxed text-concert-text">
+              <p>
+                Wir laden Sie herzlich zu unserem großen Chorkonzert „Grenzen
+                überwinden“ in Kandern in der St. Clemens Kirche ein.
               </p>
 
-              <button
-                id="eventbrite-widget-modal-trigger-19"
-                type="button"
-                className="inline-block rounded-lg bg-blue-600 px-6 py-3 font-semibold text-white transition hover:bg-blue-700"
-              >
-                Hier buchen!
-              </button>
-            </div>
-
-            <div className="rounded-xl border border-gray-200 p-6">
-              <h3 className="mb-3 text-2xl font-bold text-gray-900">
-                Samstag, 20. Juni
-              </h3>
-
-              <p className="mb-5 text-gray-600">
-                Konzertbeginn: 19:00 Uhr
+              <p>
+                Reservieren Sie hier kostenlos Ihre Plätze für eines der beiden
+                Konzerte.
               </p>
 
-              <button
-                id="eventbrite-widget-modal-trigger-20"
-                type="button"
-                className="inline-block rounded-lg bg-blue-600 px-6 py-3 font-semibold text-white transition hover:bg-blue-700"
-              >
-                Hier buchen!
-              </button>
+              <p>
+                Wir freuen uns sehr auf Ihr Kommen und auf einen gemeinsamen
+                musikalischen Abend!
+              </p>
             </div>
-          </div>
 
-          <noscript>
-            <p className="mt-6 text-sm text-gray-500">
-              JavaScript ist deaktiviert. Bitte buchen Sie direkt über
-              Eventbrite.
+            <div className="mx-auto mb-10 h-px max-w-xs bg-concert-gold" />
+
+            {/* EVENTBRITE CHECKOUTS */}
+            <div id="tickets" className="scroll-mt-8">
+              <h2 className="mb-6 text-center text-2xl font-semibold text-concert-burgundy">
+                Tickets reservieren
+              </h2>
+
+              <div className="grid gap-5 lg:grid-cols-2">
+                {concerts.map((concert) => (
+                  <article
+                    key={concert.eventId}
+                    className="overflow-hidden rounded-lg border border-concert-gold/30 bg-concert-cream shadow-inner"
+                  >
+                    <div className="border-b border-concert-gold/25 px-5 py-6 text-center">
+                      <p className="mb-2 text-sm font-semibold uppercase tracking-[0.18em] text-concert-gold">
+                        Konzerttermin
+                      </p>
+                      <h3 className="text-3xl font-bold text-concert-text">
+                        {concert.title}
+                      </h3>
+                      <p className="mt-4 text-lg text-concert-forest">
+                        {concert.time}
+                      </p>
+                      <a
+                        href={`#${getEventbriteContainerId(concert.eventId)}`}
+                        className="mt-6 inline-flex rounded-md bg-concert-burgundy px-6 py-3 text-base font-semibold text-white shadow-sm transition hover:bg-concert-burgundy-dark"
+                      >
+                        Tickets reservieren
+                      </a>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
+
+            <noscript>
+              <p className="mt-6 text-sm text-concert-forest">
+                JavaScript ist deaktiviert. Bitte buchen Sie direkt über
+                Eventbrite.
+              </p>
+            </noscript>
+
+            <p className="mt-8 text-center text-sm leading-6 text-concert-forest">
+              Bitte nehmen Sie reservierte Plätze spätestens 20 Minuten vor
+              Konzertbeginn ein. <br />
+              Danach können freie Plätze weitergegeben werden.
             </p>
-          </noscript>
 
-          <p className="mt-8 text-sm text-gray-500">
-            Bitte nehmen Sie reservierte Plätze spätestens 20 Minuten vor Konzertbeginn
-            ein. <br />
-            Danach können freie Plätze weitergegeben werden.
-          </p>
+            {/* CHÖRE */}
+            <div className="mt-12 text-left">
+              <h3 className="mb-5 text-center text-xl font-semibold text-concert-text">
+                Mitwirkende Chöre
+              </h3>
 
-          {/* CHÖRE */}
-          <div className="mt-10 text-left">
-            <h3 className="mb-4 text-xl font-semibold text-gray-900 text-center">
-              Mitwirkende Chöre
-            </h3>
+              <ul className="grid gap-3 text-center text-concert-text sm:grid-cols-3">
+                <li className="rounded-md bg-concert-cream px-4 py-3">
+                  <a
+                    href="https://popchor-tannenkirch.de"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-medium text-concert-burgundy hover:text-concert-burgundy-dark hover:underline"
+                  >
+                    Popchor Tannenkirch
+                  </a>
+                </li>
 
-            <ul className="space-y-3 text-center text-gray-700">
-              <li>
-                <a
-                  href="https://popchor-tannenkirch.de"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-600 hover:underline"
-                >
-                  Popchor Tannenkirch
-                </a>
-              </li>
+                <li className="rounded-md bg-concert-cream px-4 py-3">
+                  <a
+                    href="https://www.gesangvereinholzen.de"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-medium text-concert-burgundy hover:text-concert-burgundy-dark hover:underline"
+                  >
+                    Gesangverein Holzen
+                  </a>
+                </li>
 
-              <li>
-                <a
-                  href="https://www.gesangvereinholzen.de"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-600 hover:underline"
-                >
-                  Gesangverein Holzen
-                </a>
-              </li>
-
-              <li>Gesangverein Feuerbach 1865 e.V.</li>
-            </ul>
+                <li className="rounded-md bg-concert-cream px-4 py-3">
+                  Gesangverein Feuerbach 1865 e.V.
+                </li>
+              </ul>
+            </div>
           </div>
         </section>
 
         {/* FOOTER */}
-        <footer className="mt-8 text-xs text-gray-500">
-          <Link href="/impressum" className="hover:underline">
+        <footer className="border-t border-concert-gold/25 px-5 py-7 text-center text-xs text-concert-forest">
+          <Link
+            href="/impressum"
+            className="font-medium text-concert-burgundy hover:text-concert-burgundy-dark hover:underline"
+          >
             Impressum
           </Link>
         </footer>

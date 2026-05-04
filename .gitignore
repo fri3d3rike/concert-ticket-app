@@ -10,6 +10,9 @@
 !.yarn/releases
 !.yarn/versions
 
+# code quality
+.prettier*
+
 # testing
 /coverage
 

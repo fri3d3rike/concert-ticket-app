@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   title: "Grenzen überwinden – Chorkonzert",
   description: "Kirchenchor Konzert Kandern 2026",
   icons: {
-    icon: '/favicon.ico',
+    icon: "/favicon.ico",
   },
 };
 
@@ -27,7 +27,7 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="de"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">{children}</body>

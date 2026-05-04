@@ -1,26 +1,38 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f7f1e8;
+  --foreground: #2e2723;
+  --concert-cream: #f7f1e8;
+  --concert-text: #2e2723;
+  --concert-burgundy: #8b2e2e;
+  --concert-burgundy-dark: #6f2323;
+  --concert-gold: #c28a3a;
+  --concert-forest: #2f4a3c;
+  --concert-beige: #efe3d2;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-concert-cream: var(--concert-cream);
+  --color-concert-text: var(--concert-text);
+  --color-concert-burgundy: var(--concert-burgundy);
+  --color-concert-burgundy-dark: var(--concert-burgundy-dark);
+  --color-concert-gold: var(--concert-gold);
+  --color-concert-forest: var(--concert-forest);
+  --color-concert-beige: var(--concert-beige);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+::selection {
+  background: var(--concert-gold);
+  color: var(--concert-text);
 }
