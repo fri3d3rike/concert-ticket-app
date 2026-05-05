@@ -10,15 +10,12 @@ export default function Impressum() {
           <strong className="text-concert-forest">Veranstalter:</strong>
           <br />
           Gesangverein Feuerbach 1865 e.V.
-        </p>
-
-        <p className="mb-4">
-          <strong className="text-concert-forest">In Kooperation mit:</strong>
-          <br />
-          Popchor Tannenkirch
           <br />
           Gesangverein Holzen
+          <br />
+          Popchor Tannenkirch
         </p>
+
 
         <p className="mb-4">
           <a

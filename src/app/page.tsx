@@ -105,18 +105,21 @@ export default function Home() {
             </h1>
 
             <div className="p-8 mb-4 flex flex-wrap justify-center gap-6 text-sm font-medium text-concert-forest">
-              <span className="text-sm font-semibold  tracking-[0.24em] text-[#F1D8A9]">
-                Popchor Tannenkirch
+                            <span className="text-sm font-semibold  tracking-[0.24em] text-[#F1D8A9]">
+                Gesangverein Feuerbach
               </span>
+
               <span className="text-sm font-semibold  tracking-[0.24em] text-[#F1D8A9]">
                 Gesangverein Holzen
               </span>
+
               <span className="text-sm font-semibold  tracking-[0.24em] text-[#F1D8A9]">
-                Gesangverein Feuerbach
+                Popchor Tannenkirch
               </span>
+
             </div>
             <p className="mt-2 max-w-2xl text-lg leading-8 text-[#F7F1E8] sm:text-xl">
-              Ein gemeinsamer musikalischer Abend in der St. Clemens Kirche.
+              Ein gemeinsamer musikalischer Abend in der Stadtkirche St. Clemens
             </p>
           </div>
         </section>
@@ -125,19 +128,14 @@ export default function Home() {
           <div className="mx-auto max-w-5xl rounded-lg border border-concert-gold/25 bg-concert-beige p-6 shadow-[0_24px_70px_rgba(46,39,35,0.12)] sm:p-10">
             <div className="mx-auto mb-9 max-w-3xl space-y-4 text-center text-lg leading-relaxed text-concert-text">
               <p>
-                Wir laden Sie herzlich zu unserem großen Chorkonzert „Grenzen
-                überwinden“ in Kandern in der St. Clemens Kirche ein.
+                Herzliche Einladung zu unserem Chorkonzert „Grenzen
+                überwinden“ in Kandern in der St. Clemens Kirche
               </p>
 
               <p>
-                Reservieren Sie hier kostenlos Ihre Plätze für eines der beiden
-                Konzerte.
+                Hier geht es zu kostenlosen Platzreservierung.
               </p>
 
-              <p>
-                Wir freuen uns sehr auf Ihr Kommen und auf einen gemeinsamen
-                musikalischen Abend!
-              </p>
             </div>
 
             <div className="mx-auto mb-10 h-px max-w-xs bg-concert-gold" />
@@ -198,16 +196,8 @@ export default function Home() {
 
               <ul className="grid gap-3 text-center text-concert-text sm:grid-cols-3">
                 <li className="rounded-md bg-concert-cream px-4 py-3">
-                  <a
-                    href="https://popchor-tannenkirch.de"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="font-medium text-concert-burgundy hover:text-concert-burgundy-dark hover:underline"
-                  >
-                    Popchor Tannenkirch
-                  </a>
+                  Gesangverein Feuerbach 1865 e.V.
                 </li>
-
                 <li className="rounded-md bg-concert-cream px-4 py-3">
                   <a
                     href="https://www.gesangvereinholzen.de"
@@ -218,9 +208,15 @@ export default function Home() {
                     Gesangverein Holzen
                   </a>
                 </li>
-
                 <li className="rounded-md bg-concert-cream px-4 py-3">
-                  Gesangverein Feuerbach 1865 e.V.
+                  <a
+                    href="https://popchor-tannenkirch.de"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-medium text-concert-burgundy hover:text-concert-burgundy-dark hover:underline"
+                  >
+                    Popchor Tannenkirch
+                  </a>
                 </li>
               </ul>
             </div>
