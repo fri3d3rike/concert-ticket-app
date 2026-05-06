@@ -133,7 +133,7 @@ export default function Home() {
               </p>
 
               <p>
-                Hier geht es zu kostenlosen Platzreservierung.
+                Hier geht es zur kostenlosen Platzreservierung.
               </p>
 
             </div>
