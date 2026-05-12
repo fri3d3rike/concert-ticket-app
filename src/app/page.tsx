@@ -162,6 +162,7 @@ export default function Home() {
                       <p className="mt-4 text-lg text-concert-forest">
                         {concert.time}
                       </p>
+                      <p className="mt-4 text-lg text-concert-forest"> Einlass ab 18:00 Uhr </p>
                       <button
                         id={getEventbriteModalTriggerId(concert.eventId)}
                         type="button"
@@ -183,9 +184,10 @@ export default function Home() {
             </noscript>
 
             <p className="mt-8 text-center text-sm leading-6 text-concert-forest">
-              Bitte nehmen Sie reservierte Plätze spätestens 20 Minuten vor
-              Konzertbeginn ein. <br />
-              Danach können freie Plätze weitergegeben werden.
+              
+              Bitte holen Sie reservierte Karten bis spätestens 18:45 Uhr ab. <br />
+              Danach werden nicht abgeholte Reservierungen freigegeben.
+
             </p>
 
             {/* CHÖRE */}

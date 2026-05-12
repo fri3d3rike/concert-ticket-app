@@ -13,6 +13,12 @@
 # code quality
 .prettier*
 
+# ignore
+*.jpg
+*.png
+*.pdf
+
+
 # testing
 /coverage
 
