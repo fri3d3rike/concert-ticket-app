@@ -129,7 +129,7 @@ export default function Home() {
             <div className="mx-auto mb-9 max-w-3xl space-y-4 text-center text-lg leading-relaxed text-concert-text">
               <p>
                 Herzliche Einladung zu unserem Chorkonzert „Grenzen
-                überwinden“ in Kandern in der St. Clemens Kirche
+                überwinden“  <br /> in Kandern in der St. Clemens Kirche
               </p>
 
               <p>
