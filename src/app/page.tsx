@@ -184,9 +184,9 @@ export default function Home() {
             </noscript>
 
             <p className="mt-8 text-center text-sm leading-6 text-concert-forest">
-              
-              Bitte holen Sie reservierte Karten bis spätestens 18:45 Uhr ab. <br />
-              Danach werden nicht abgeholte Reservierungen freigegeben.
+
+              Reservierte Tickets müssen spätestens um 18:45 Uhr abgeholt werden  <br />
+              Nicht belegte Plätze werden danach freigegeben
 
             </p>
 
